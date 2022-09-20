@@ -15,7 +15,7 @@ public class MaxMinArray {
 				  }
 				  System.out.println("max "+max);
 				  System.out.println("min "+min);
-			    System.out.println("new devvvvv ");
+			    
 	  }
 	}	  
   }
