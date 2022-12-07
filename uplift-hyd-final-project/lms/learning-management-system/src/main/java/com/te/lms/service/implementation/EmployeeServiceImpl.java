@@ -108,120 +108,120 @@ public class EmployeeServiceImpl implements EmployeeService {
 		for (TechnicalSkills technicalSkills2 : technicalSkills) {
 			technicalSkills2.setEmployee(employee);
 		}
-	
+
 		employeeRepository.save(employee);
-		
+
 		return Optional.ofNullable(employee.getEmployeeId());
 	}
 
 	@Override
 	public Optional<Boolean> update(String empId, UpdateDto updateDto) {
 		Optional<Employee> employee = employeeRepository.findById(empId);
-		if(employee.isPresent()) {
+		if (employee.isPresent()) {
 			Employee employee1 = employee.get();
 			employee1.setBloodGroup(updateDto.getBloodGroup());
 			employee1.setEmployeeDOB(updateDto.getEmployeeDOB());
 			employee1.setEmployeeNationality(updateDto.getEmployeeNationality());
-			
-			
+
 			SecondaryInfo secondaryInfo2 = employee1.getSecondaryInfo();
-			if(secondaryInfo2!=null) {
-				BeanUtils.copyProperties(updateDto.getSecondaryInfoDto(),secondaryInfo2, new String[] {"sno"});
+			if (secondaryInfo2 != null) {
+				BeanUtils.copyProperties(updateDto.getSecondaryInfoDto(), secondaryInfo2, new String[] { "sno" });
 				secondaryInfo2.setEmployee(employee1);
 				employee1.setSecondaryInfo(secondaryInfo2);
 			}
-			
-			
-			
-			List<EducationDetails> educationDetails  = employee1.getEducationDetails();
+
+			List<EducationDetails> educationDetails = employee1.getEducationDetails();
 			List<EducationDetails> educationDetails2 = Lists.newArrayList();
-			 if(educationDetails!=null) {
-				 
-				 for (EducationDetailsDto educationDetailsDto : updateDto.getEducationDetailsDto()) {
-				    EducationDetails educationDetailsEntitiy = new EducationDetails();
-				    BeanUtils.copyProperties(educationDetailsDto, educationDetailsEntitiy);
-				    educationDetails2.add(educationDetailsEntitiy);
-				    educationDetailsEntitiy.setEmployee(employee1);
+			if (educationDetails != null) {
+
+				for (EducationDetailsDto educationDetailsDto : updateDto.getEducationDetailsDto()) {
+					EducationDetails educationDetailsEntitiy = new EducationDetails();
+					BeanUtils.copyProperties(educationDetailsDto, educationDetailsEntitiy);
+					educationDetails2.add(educationDetailsEntitiy);
+					educationDetailsEntitiy.setEmployee(employee1);
 				}
-				 
-				 for(int i=0;i<educationDetails2.size();i++) {
-					 BeanUtils.copyProperties(educationDetails2.get(i), educationDetails.get(i),new String[] {"educationId"});
-				 }
-				 
-				 employee1.setEducationDetails(educationDetails);
-			 }
-			 
-			 List<AddressDetails> addressDetails = employee1.getAddressDetails();
-			 List<AddressDetails> addressDetails2 = Lists.newArrayList();
-			 if(addressDetails!=null) {
-				for(AddressDetailsDto addressDetailsDto : updateDto.getAddressDetailsDto()) {
+
+				for (int i = 0; i < educationDetails2.size(); i++) {
+					BeanUtils.copyProperties(educationDetails2.get(i), educationDetails.get(i),
+							new String[] { "educationId" });
+				}
+
+				employee1.setEducationDetails(educationDetails);
+			}
+
+			List<AddressDetails> addressDetails = employee1.getAddressDetails();
+			List<AddressDetails> addressDetails2 = Lists.newArrayList();
+			if (addressDetails != null) {
+				for (AddressDetailsDto addressDetailsDto : updateDto.getAddressDetailsDto()) {
 					AddressDetails addressDetailsEntity = new AddressDetails();
 					BeanUtils.copyProperties(addressDetailsDto, addressDetailsEntity);
 					addressDetails2.add(addressDetailsEntity);
 					addressDetailsEntity.setEmployee(employee1);
 				}
-				
-				for(int i = 0;i<addressDetails2.size();i++) {
-					BeanUtils.copyProperties(addressDetails2.get(i),addressDetails.get(i),new String[] {"addressId"});
+
+				for (int i = 0; i < addressDetails2.size(); i++) {
+					BeanUtils.copyProperties(addressDetails2.get(i), addressDetails.get(i),
+							new String[] { "addressId" });
 				}
 				employee1.setAddressDetails(addressDetails);
-			 }
-			 
-			 BankDetails bankDetails = employee1.getBankDetails();
-			 if(bankDetails != null) {
-				 BeanUtils.copyProperties(updateDto.getBankDetailsDto(),bankDetails,new String[] {"accountNum"});
-				 bankDetails.setEmployee(employee1);
-				 employee1.setBankDetails(bankDetails);
-			 }
-			
-			 List<TechnicalSkills> technicalSkills = employee1.getTechnicalSkills();
-			 List<TechnicalSkills> technicalSkills1 = Lists.newArrayList();
-			 
-			 if(technicalSkills!=null) {
-				 for(TechnicalSkillsDto technicalSkillsDto : updateDto.getTechnicalSkillsDto()) {
-					 TechnicalSkills technicalSkillsEntity = new TechnicalSkills();
-					 BeanUtils.copyProperties(technicalSkillsDto, technicalSkillsEntity);
-					 technicalSkills1.add(technicalSkillsEntity);
-					 technicalSkillsEntity.setEmployee(employee1);
-				 }
-				 for(int i = 0;i<technicalSkills1.size();i++) {
-					 BeanUtils.copyProperties(technicalSkills1.get(i), technicalSkills.get(i),new String[] {"technicalId"});
-				 }
-					 employee1.setTechnicalSkills(technicalSkills);
-			 }
-			 
-			 List<Experience> experience = employee1.getExperience();
-			 List<Experience> experience1 = Lists.newArrayList();
-			 
-			 if(experience!=null) {
-				 for(ExperienceDto experienceDto : updateDto.getExperienceDto()) {
-					 Experience experienceEntity = new Experience();
-					 BeanUtils.copyProperties(experienceDto, experienceEntity);
-					 experience1.add(experienceEntity);
-					 experienceEntity.setEmployee(employee1);
-				 }
-				 for(int i = 0;i<experience1.size();i++) {
-					 BeanUtils.copyProperties(experience1.get(i), experience.get(i),new String[] {"experienceId"});
-				 }
-				 employee1.setExperience(experience);
-			 }
-			 
-			 List<Contact> contact = employee1.getContact();
-			 List<Contact> contact1 = Lists.newArrayList();
-			 
-			 if(contact != null) {
-				 for(ContactDto contactDto : updateDto.getContactDto()) {
-					 Contact contactEntity = new Contact();
-					 BeanUtils.copyProperties(contactDto, contactEntity);
-					 contact1.add(contactEntity);
-					 contactEntity.setEmployee(employee1);
-				 }
-				 for(int i = 0;i < contact1.size();i++) {
-					 BeanUtils.copyProperties(contact1.get(i), contact.get(i),new String[] {"contactNum"});
-				 }
-				 employee1.setContact(contact);
-			 }
-			 
+			}
+
+			BankDetails bankDetails = employee1.getBankDetails();
+			if (bankDetails != null) {
+				BeanUtils.copyProperties(updateDto.getBankDetailsDto(), bankDetails, new String[] { "accountNum" });
+				bankDetails.setEmployee(employee1);
+				employee1.setBankDetails(bankDetails);
+			}
+
+			List<TechnicalSkills> technicalSkills = employee1.getTechnicalSkills();
+			List<TechnicalSkills> technicalSkills1 = Lists.newArrayList();
+
+			if (technicalSkills != null) {
+				for (TechnicalSkillsDto technicalSkillsDto : updateDto.getTechnicalSkillsDto()) {
+					TechnicalSkills technicalSkillsEntity = new TechnicalSkills();
+					BeanUtils.copyProperties(technicalSkillsDto, technicalSkillsEntity);
+					technicalSkills1.add(technicalSkillsEntity);
+					technicalSkillsEntity.setEmployee(employee1);
+				}
+				for (int i = 0; i < technicalSkills1.size(); i++) {
+					BeanUtils.copyProperties(technicalSkills1.get(i), technicalSkills.get(i),
+							new String[] { "technicalId" });
+				}
+				employee1.setTechnicalSkills(technicalSkills);
+			}
+
+			List<Experience> experience = employee1.getExperience();
+			List<Experience> experience1 = Lists.newArrayList();
+
+			if (experience != null) {
+				for (ExperienceDto experienceDto : updateDto.getExperienceDto()) {
+					Experience experienceEntity = new Experience();
+					BeanUtils.copyProperties(experienceDto, experienceEntity);
+					experience1.add(experienceEntity);
+					experienceEntity.setEmployee(employee1);
+				}
+				for (int i = 0; i < experience1.size(); i++) {
+					BeanUtils.copyProperties(experience1.get(i), experience.get(i), new String[] { "experienceId" });
+				}
+				employee1.setExperience(experience);
+			}
+
+			List<Contact> contact = employee1.getContact();
+			List<Contact> contact1 = Lists.newArrayList();
+
+			if (contact != null) {
+				for (ContactDto contactDto : updateDto.getContactDto()) {
+					Contact contactEntity = new Contact();
+					BeanUtils.copyProperties(contactDto, contactEntity);
+					contact1.add(contactEntity);
+					contactEntity.setEmployee(employee1);
+				}
+				for (int i = 0; i < contact1.size(); i++) {
+					BeanUtils.copyProperties(contact1.get(i), contact.get(i), new String[] { "contactNum" });
+				}
+				employee1.setContact(contact);
+			}
+
 			employeeRepository.save(employee1);
 		}
 		return null;

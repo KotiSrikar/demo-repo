@@ -1,10 +1,13 @@
 package com.te.lms.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.te.lms.enums.Action;
@@ -25,14 +28,16 @@ import lombok.Setter;
 public class Batch {
 	
 	@Id
-	private Integer batchId;
+	private String batchId;
 	
 	private String batchName;
 	
-	@OneToOne(mappedBy = "batch",cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL )
+	@JoinColumn(name = "mentor_id")
 	private Mentor mentor;
 	
-	private String technologies;
+	@ManyToMany(mappedBy = "batch",cascade = CascadeType.ALL)
+	private List<Technologies> technologies;
 	
 	private LocalDate startDate;
 	
