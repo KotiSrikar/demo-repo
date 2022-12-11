@@ -1,12 +1,45 @@
 
-ˆ	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æãëëşÿÿÿÿ8ƒù¯ÄÎ0H»
-RMINORZ
+x	java:S112]"FDefine and throw a dedicated exception instead of using a generic one.(ºêÄ8ü½›ŠÏ0HŸRMAJORZ
 CODE_SMELL
-z
-java:S1854"BRemove this useless assignment to local variable "Optionalmentor".(Æãëëşÿÿÿÿ8ƒù¯ÄÎ0H¼
-RMAJORZ
+}	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(õŸÖ®øÿÿÿÿ8ÿâí×Î0H–RMAJORZ
 CODE_SMELL
-k
-java:S1481"3Remove this unused "Optionalmentor" local variable.(Æãëëşÿÿÿÿ8ƒù¯ÄÎ0H½
-RMINORZ
+x	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(£¦ñÅ8ÿâí×Î0H¦RMAJORZ
+CODE_SMELL
+}	java:S112>"FDefine and throw a dedicated exception instead of using a generic one.(ÅªÊ³ÿÿÿÿÿ8ü½›ŠÏ0H¤RMAJORZ
+CODE_SMELL
+Œ
+java:S2293P"YReplace the type specification in this constructor call with the diamond operator ("<>").(·ÚÎé8û’³Ğ0HİRMINORZ
+CODE_SMELL
+b
+java:S5411Y"*Use the primitive boolean expression here.(µš¾Àÿÿÿÿÿ8ü½›ŠÏ0HRMINORZ
+CODE_SMELL
+h
+java:S1481E"5Remove this unused "optionalMentorId" local variable.(÷óœ§8½—ÔßÎ0H”RMINORZ
+CODE_SMELL
+Œ
+java:S2293d"YReplace the type specification in this constructor call with the diamond operator ("<>").(…´¥ç8æßáĞ0H©RMINORZ
+CODE_SMELL
+b
+java:S5411N"*Use the primitive boolean expression here.(òÏ¢øÿÿÿÿ8ü½›ŠÏ0HšRMINORZ
+CODE_SMELL
+‹
+java:S2293G"YReplace the type specification in this constructor call with the diamond operator ("<>").(ã¡©$8½—ÔßÎ0HRMINORZ
+CODE_SMELL
+’
+java:S2293’"YReplace the type specification in this constructor call with the diamond operator ("<>").(‹»‹ÿşÿÿÿÿ8ÿâí×Î0H¢RMINORZ
+CODE_SMELL
+w
+java:S1854E"DRemove this useless assignment to local variable "optionalMentorId".(÷óœ§8½—ÔßÎ0H¥RMAJORZ
+CODE_SMELL
+‘
+java:S2293["YReplace the type specification in this constructor call with the diamond operator ("<>").(ß¤×ïúÿÿÿÿ8¬ÀšĞ0HîRMINORZ
+CODE_SMELL
+Œ
+java:S22932"YReplace the type specification in this constructor call with the diamond operator ("<>").(†‘ê‰8ÿâí×Î0H©RMINORZ
+CODE_SMELL
+‘
+java:S2293<"YReplace the type specification in this constructor call with the diamond operator ("<>").(‚Ï³œøÿÿÿÿ8ü½›ŠÏ0H RMINORZ
+CODE_SMELL
+Œ
+java:S2293„"YReplace the type specification in this constructor call with the diamond operator ("<>").(§ªËW8ıÎ­†Ï0H§RMINORZ
 CODE_SMELL

@@ -1,8 +1,9 @@
 package com.te.lms.enums;
 
 public enum Status {
-	INPROGRESS("INPROGRESS"),COMPLETED("COMPLETED"),TOBESTARTED("TOBESTARTED");
 	
+	ACTIVE("ACTIVE"), INACTIVE("INACTIVE");
+
 	private final String status;
 
 	private Status(String status) {
@@ -12,6 +13,4 @@ public enum Status {
 	public String getStatus() {
 		return status;
 	}
-	
-	
 }

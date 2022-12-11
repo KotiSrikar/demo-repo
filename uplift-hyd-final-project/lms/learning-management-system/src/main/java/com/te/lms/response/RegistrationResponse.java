@@ -9,12 +9,21 @@ import lombok.Setter;
 @Setter
 public class RegistrationResponse<T> {
 	private String message;
+	private T data;
 	private LocalDateTime timeStamp = LocalDateTime.now();
 	
 	public RegistrationResponse(String message) {
 		super();
 		this.message = message;
 	}
+
+	public RegistrationResponse(String message, T data) {
+		super();
+		this.message = message;
+		this.data = data;
+	}
+	
+	
 	
 	
 }

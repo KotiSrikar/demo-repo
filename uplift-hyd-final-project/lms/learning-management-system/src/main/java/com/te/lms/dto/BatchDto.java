@@ -3,7 +3,7 @@ package com.te.lms.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.te.lms.enums.Status;
+import com.te.lms.enums.BatchStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,5 +32,5 @@ public class BatchDto {
 	
 	private LocalDate endDate;
 	
-	private Status status;
+	private BatchStatus batchStatus;
 }

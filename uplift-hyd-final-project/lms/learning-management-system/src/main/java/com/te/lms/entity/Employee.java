@@ -7,15 +7,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
-import com.te.lms.enums.EmployeeStatus;
 import com.te.lms.enums.Gender;
+import com.te.lms.enums.Status;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +48,7 @@ public class Employee {
 	private Gender gender;
 	private String employeeNationality;
 	@Enumerated(EnumType.STRING)
-	private EmployeeStatus employeeStatus;
+	private Status employeeStatus;
 
 	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
 	private SecondaryInfo secondaryInfo;
@@ -68,4 +70,7 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<Contact> contact;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Batch batch;
 }

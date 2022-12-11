@@ -1,0 +1,18 @@
+package com.te.lms.enums;
+
+public enum BatchStatus {
+
+	INPROGRESS("INPROGRESS"), COMPLETED("COMPLETED"),TOBESTARTED("TOBESTARTED");
+	
+	private final String batchString;
+
+	private BatchStatus(String batchString) {
+		this.batchString = batchString;
+	}
+
+	public String getBatchString() {
+		return batchString;
+	}
+	
+	
+}

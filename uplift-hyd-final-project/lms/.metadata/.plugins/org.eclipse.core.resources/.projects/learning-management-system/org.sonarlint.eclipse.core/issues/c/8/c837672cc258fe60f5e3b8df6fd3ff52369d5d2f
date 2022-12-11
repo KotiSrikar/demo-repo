@@ -1,3 +1,13 @@
 
-‡	java:S116("URename this field "Experience" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹£±à8¨ç”ÉÈ0HşRMINORZ
+‡	java:S116&"URename this field "Experience" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹£±à8¨ç”ÉÈ0HŞRMINORZ
+CODE_SMELL
+p
+java:S1128"=Remove this unused import 'javax.persistence.GeneratedValue'.(¤®À‚8ÀÇ Ğ0H RMINORZ
+CODE_SMELL
+p
+java:S1128"=Remove this unused import 'javax.persistence.GenerationType'.(ı÷õ¡8ÀÇ Ğ0H¢RMINORZ
+CODE_SMELL
+…
+java:S1128
+"MRemove this unused import 'org.checkerframework.common.aliasing.qual.Unique'.(ğëŞ¨ÿÿÿÿÿ8ÀÇ Ğ0H¤RMINORZ
 CODE_SMELL

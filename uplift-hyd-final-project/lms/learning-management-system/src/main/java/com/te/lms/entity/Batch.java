@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.te.lms.enums.Action;
-import com.te.lms.enums.Status;
+import com.te.lms.enums.BatchStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,23 +26,26 @@ import lombok.Setter;
 @Builder
 @Entity
 public class Batch {
-	
+
 	@Id
 	private String batchId;
-	
+
 	private String batchName;
-	
-	@OneToOne(cascade = CascadeType.ALL )
+
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "mentor_id")
 	private Mentor mentor;
-	
-	@ManyToMany(mappedBy = "batch",cascade = CascadeType.ALL)
+
+	@ManyToMany(mappedBy = "batch", cascade = CascadeType.ALL)
 	private List<Technologies> technologies;
-	
+
 	private LocalDate startDate;
-	
+
 	private LocalDate endDate;
-	
-	private Status status;
+
+	private BatchStatus batchStatus;
+
+	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL)
+	private List<Employee> employee;
 
 }
