@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.te.lms.enums.BatchStatus;
-import com.te.lms.enums.Status;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,9 +45,6 @@ public class Batch {
 
 	private LocalDate endDate;
 
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	
 	@Enumerated(EnumType.STRING)
 	private BatchStatus batchStatus;
 

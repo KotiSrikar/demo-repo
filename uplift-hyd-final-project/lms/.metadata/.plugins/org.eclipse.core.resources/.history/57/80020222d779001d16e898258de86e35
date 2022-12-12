@@ -119,7 +119,6 @@ public class AdminServiceImpl implements AdminService {
 			technologies.add(technologiesEntity);
 			technologiesEntity.getBatch().add(batch);
 		}
-		batch.setStatus(Status.ACTIVE);
 		batch.setTechnologies(technologies);
 		batchRepository.save(batch);
 		return Optional.ofNullable(batchDto.getBatchId());
@@ -282,11 +281,7 @@ public class AdminServiceImpl implements AdminService {
 			Employee employee = empFromDb.get();
 			EmployeeDto employeeDto = new EmployeeDto();
 			BeanUtils.copyProperties(employee, employeeDto);
-			
-			employeeDto.setEmployeeGender(employee.getGender());
-			employeeDto.setEmployeeEmailId(employee.getEmployeeId());
-			employeeDto.setEmployeeDesignation(employee.getDesignation());
-			
+
 			SecondaryInfoDto secondaryInfoDto = new SecondaryInfoDto();
 			BeanUtils.copyProperties(employee.getSecondaryInfo(), secondaryInfoDto);
 			employeeDto.setSecondaryInfoDto(secondaryInfoDto);

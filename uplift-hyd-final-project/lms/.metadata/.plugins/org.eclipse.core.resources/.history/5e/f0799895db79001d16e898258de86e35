@@ -82,13 +82,13 @@ public class AdminController {
 		throw new RuntimeException("unable to delete the mentor");
 	}
 
-	@PutMapping(path = "/batch/delete/{batchId}")
-	public RegistrationResponse<String> deleteBatch(@PathVariable(name = "batchId") String batchId) {
+	@PutMapping(path = "/batch/delete/{empId}")
+	public RegistrationResponse<String> deleteBatch(@PathVariable(name = "batch") String batchId) {
 
 		Boolean batchRemoved = adminService.deleteBatch(batchId);
 		if (batchRemoved) {
 
-			return new RegistrationResponse<String>("batch has been removed successfully", batchId);
+			return new RegistrationResponse<String>("mentor has been removed successfully", batchId);
 		}
 		throw new RuntimeException("unable to delete the batch");
 	}

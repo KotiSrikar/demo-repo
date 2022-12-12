@@ -22,6 +22,7 @@ import com.te.lms.email.Email;
 import com.te.lms.exception.BatchesNotFoundException;
 import com.te.lms.exception.EmployeeCannotBeApprovedException;
 import com.te.lms.exception.EmployeeNotFoundException;
+import com.te.lms.exception.EmployeeNotFoundExcpetion;
 import com.te.lms.exception.NoMentorsFoundException;
 import com.te.lms.exception.UnableToFindTheEmployee;
 import com.te.lms.response.RegistrationResponse;
@@ -82,13 +83,13 @@ public class AdminController {
 		throw new RuntimeException("unable to delete the mentor");
 	}
 
-	@PutMapping(path = "/batch/delete/{batchId}")
-	public RegistrationResponse<String> deleteBatch(@PathVariable(name = "batchId") String batchId) {
+	@PutMapping(path = "/batch/delete/{empId}")
+	public RegistrationResponse<String> deleteBatch(@PathVariable(name = "batch") String batchId) {
 
 		Boolean batchRemoved = adminService.deleteBatch(batchId);
 		if (batchRemoved) {
 
-			return new RegistrationResponse<String>("batch has been removed successfully", batchId);
+			return new RegistrationResponse<String>("mentor has been removed successfully", batchId);
 		}
 		throw new RuntimeException("unable to delete the batch");
 	}
@@ -101,7 +102,7 @@ public class AdminController {
 		}
 		throw new UnableToFindTheEmployee("Data not found");
 	}
-
+	
 	@GetMapping(path = "/get/mentors")
 	public ResponseEntity<List<MentorDto>> getMentors() {
 		Optional<List<MentorDto>> mentorsFromDb = adminService.getMentors();
@@ -110,7 +111,7 @@ public class AdminController {
 		}
 		throw new NoMentorsFoundException("no mentors found");
 	}
-
+	
 	@GetMapping(path = "/get/batches")
 	public ResponseEntity<List<BatchDto>> getBatch() {
 		Optional<List<BatchDto>> batchesFromDb = adminService.getBatchDetails();
@@ -119,7 +120,7 @@ public class AdminController {
 		}
 		throw new BatchesNotFoundException("No batches Found");
 	}
-
+	
 	@PostMapping(path = "/approve/{empId}")
 	public RegistrationResponse<String> approveRequest(@PathVariable(name = "empId") String empId,
 			@RequestBody ApproveDto approveDto) {
@@ -133,7 +134,7 @@ public class AdminController {
 		}
 		throw new EmployeeCannotBeApprovedException("employee cannot be approved");
 	}
-
+	
 	@PutMapping(path = "/reject/{empId}")
 	public RegistrationResponse<String> rejectRequest(@PathVariable(name = "empId") String empId,
 			@RequestBody RejectDto rejectDto) {
@@ -148,4 +149,5 @@ public class AdminController {
 		throw new EmployeeNotFoundException("unable to find the employee");
 	}
 
+	
 }
