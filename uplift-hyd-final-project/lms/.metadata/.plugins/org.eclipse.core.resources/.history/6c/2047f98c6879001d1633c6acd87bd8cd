@@ -1,5 +1,0 @@
-package com.te.lms.exception;
-
-public class EmployeeNotFoundExcpetion extends Exception {
-
-}

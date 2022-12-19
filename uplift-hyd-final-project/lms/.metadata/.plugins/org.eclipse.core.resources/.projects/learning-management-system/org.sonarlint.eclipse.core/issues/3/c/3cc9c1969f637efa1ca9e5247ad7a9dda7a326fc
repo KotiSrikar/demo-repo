@@ -1,13 +1,13 @@
 
-u
-java:S1854("BRemove this useless assignment to local variable "updateEmployee".(’·™8³äú’Î0H‹RMAJORZ
-CODE_SMELL
 ‘
-java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(êøËŞÿÿÿÿÿ8³äú’Î0H‡RMINORZ
-CODE_SMELL
-‘
-java:S2293""YReplace the type specification in this constructor call with the diamond operator ("<>").(°î˜µüÿÿÿÿ8ÚÀáÇÈ0H…RMINORZ
+java:S2293."YReplace the type specification in this constructor call with the diamond operator ("<>").(êøËŞÿÿÿÿÿ8³äú’Î0H²$RMINORZ
 CODE_SMELL
 f
-java:S1481("3Remove this unused "updateEmployee" local variable.(’·™8³äú’Î0H‰RMINORZ
+java:S1481,"3Remove this unused "updateEmployee" local variable.(’·™8³äú’Î0H´$RMINORZ
+CODE_SMELL
+u
+java:S1854,"BRemove this useless assignment to local variable "updateEmployee".(’·™8³äú’Î0H¶$RMAJORZ
+CODE_SMELL
+Œ
+java:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(¼¥Ù8ÚÀáÇÈ0H·$RMINORZ
 CODE_SMELL

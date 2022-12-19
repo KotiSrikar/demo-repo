@@ -18,10 +18,12 @@ import com.te.lms.dto.ExperienceDto;
 import com.te.lms.dto.MentorDto;
 import com.te.lms.dto.MessageDto;
 import com.te.lms.dto.RejectDto;
+import com.te.lms.dto.RequestListDto;
 import com.te.lms.dto.SecondaryInfoDto;
 import com.te.lms.dto.SkillsDto;
 import com.te.lms.dto.TechnicalSkillsDto;
 import com.te.lms.dto.TechnologiesDto;
+import com.te.lms.dto.UpdateBatchDto;
 import com.te.lms.dto.UpdateMentorDto;
 import com.te.lms.email.Password;
 import com.te.lms.entity.AddressDetails;
@@ -48,6 +50,7 @@ import com.te.lms.repository.MentorRepository;
 import com.te.lms.repository.RequestRepository;
 import com.te.lms.repository.RolesRepository;
 import com.te.lms.repository.SkillsRepository;
+import com.te.lms.repository.TechnologiesRepository;
 import com.te.lms.service.AdminService;
 
 import lombok.RequiredArgsConstructor;
@@ -63,7 +66,8 @@ public class AdminServiceImpl implements AdminService {
 	private final SkillsRepository skillsRepository;
 	private final RequestRepository requestRepository;
 	private final EmployeeRepository employeeRepository;
-
+	private final TechnologiesRepository technologiesRepository;
+ 
 	@Override
 	public Optional<String> register(MentorDto mentorDto) {
 
@@ -144,8 +148,9 @@ public class AdminServiceImpl implements AdminService {
 				mentor.setSkills(skills2);
 			}
 			mentorRepository.save(mentor);
+			return Optional.ofNullable(true);
 		}
-		return null;
+		return Optional.ofNullable(false);
 	}
 
 	@Override
@@ -221,7 +226,7 @@ public class AdminServiceImpl implements AdminService {
 					SkillsDto skillsDto2 = new SkillsDto();
 					BeanUtils.copyProperties(skills, skillsDto2);
 					mentorDto2.getSkillsDto().add(skillsDto2);
-				}
+				}  
 				mentorDto.add(mentorDto2);
 			}
 			return Optional.ofNullable(mentorDto);
@@ -344,4 +349,53 @@ public class AdminServiceImpl implements AdminService {
 
 		return Optional.ofNullable(null);
 	}
+
+	@Override
+	public Optional<List<RequestListDto>> getRequestList() {
+		List<RequestList> employees = requestRepository.getList();
+		if (employees != null) {
+			List<RequestListDto> requestListDto = Lists.newArrayList();
+			for (RequestList requestsLists : employees) {
+				RequestListDto requestsListsDto2 = new RequestListDto();
+				BeanUtils.copyProperties(requestsLists, requestsListsDto2);
+				requestListDto.add(requestsListsDto2);
+			}
+			return Optional.ofNullable(requestListDto);
+		}
+		return Optional.ofNullable(null);
+	}
+
+	@Override
+	public Boolean updateBatch(String batchId, UpdateBatchDto updateBatchDto) {
+
+		Optional<Batch> optBatch = batchRepository.findById(batchId);
+		if (optBatch.isPresent()) {
+			Batch batch = optBatch.get();
+			BeanUtils.copyProperties(updateBatchDto, batch);
+
+			List<Technologies> technologies1 = batch.getTechnologies();
+			technologiesRepository.deleteAll(technologies1);
+
+			for (TechnologiesDto technologiesDto : updateBatchDto.getTechnologiesDto()) {
+				Technologies technologies = new Technologies();
+				BeanUtils.copyProperties(technologiesDto, technologies);
+				technologies1.add(technologies);
+				technologies.getBatch().add(batch);
+				
+			}
+			Optional<Mentor> mentor = mentorRepository.findByMentorName(updateBatchDto.getMentorName());
+			if (mentor.isPresent()) {
+				batch.setMentor(mentor.get());
+				mentor.get().setBatch(batch);
+			}
+			
+			batch.setTechnologies(technologies1);
+			batchRepository.save(batch);
+			return true;
+		}
+		return false;
+	}
+
+	
+
 }

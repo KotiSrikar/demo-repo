@@ -8,8 +8,9 @@ import com.te.lms.dto.BatchDto;
 import com.te.lms.dto.MentorDto;
 import com.te.lms.dto.MessageDto;
 import com.te.lms.dto.RejectDto;
+import com.te.lms.dto.RequestListDto;
+import com.te.lms.dto.UpdateBatchDto;
 import com.te.lms.dto.UpdateMentorDto;
-import com.te.lms.entity.Mentor;
 
 public interface AdminService {
 
@@ -32,5 +33,9 @@ public interface AdminService {
 	Optional<MessageDto> rejectEmployee(String empId, RejectDto rejectDto);
 
 	Optional<Object> getEmployee(String employeeId);
+
+	Optional<List<RequestListDto>> getRequestList();
+
+	Boolean updateBatch(String batchId, UpdateBatchDto updateBatchDto);
 
 }

@@ -1,27 +1,25 @@
 
 l
-java:S3878Ì"8Remove this array creation and simply pass the elements.(Âö©Ï8£‰‘·Î0H´RMINORZ
+java:S3878Ì"8Remove this array creation and simply pass the elements.(Âö©Ï8£‰‘·Î0HäRMINORZ
 CODE_SMELL
 l
-java:S3878¼"8Remove this array creation and simply pass the elements.( ¶Ä¼8£‰‘·Î0HµRMINORZ
+java:S3878’"8Remove this array creation and simply pass the elements.(âÊÖ¤8’ŒÍ›Î0HÌRMINORZ
 CODE_SMELL
 q
-java:S3878«"8Remove this array creation and simply pass the elements.(É„³’ÿÿÿÿÿ8µ™Õ±Î0H¶RMINORZ
+java:S3878«"8Remove this array creation and simply pass the elements.(É„³’ÿÿÿÿÿ8µ™Õ±Î0HåRMINORZ
 CODE_SMELL
-m
-java:S2789ã"@Methods with an "Optional" return type should never return null.(¥¹ï8ÜñÆ™Î0H·RMAJORZBUG
-l
-java:S3878Ü"8Remove this array creation and simply pass the elements.(ô§¤8şö¶·Î0H¸RMINORZ
-CODE_SMELL
-l
-java:S3878¤"8Remove this array creation and simply pass the elements.(ÙÅßó8İ‰·®Î0H¹RMINORZ
+q
+java:S3878€"8Remove this array creation and simply pass the elements.(›üÁƒşÿÿÿÿ8ğß¬›Î0HæRMINORZ
 CODE_SMELL
 
-java:S3776v"RRefactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.(ßÍïñúÿÿÿÿ8İ‰·®Î0HºRCRITICALZ
-CODE_SMELL
-q
-java:S3878€"8Remove this array creation and simply pass the elements.(›üÁƒşÿÿÿÿ8ğß¬›Î0HÍRMINORZ
+java:S3776v"RRefactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.(ßÍïñúÿÿÿÿ8İ‰·®Î0HÍRCRITICALZ
 CODE_SMELL
 l
-java:S3878’"8Remove this array creation and simply pass the elements.(âÊÖ¤8’ŒÍ›Î0HÎRMINORZ
+java:S3878Ü"8Remove this array creation and simply pass the elements.(ô§¤8şö¶·Î0HâRMINORZ
+CODE_SMELL
+l
+java:S3878¤"8Remove this array creation and simply pass the elements.(ÙÅßó8İ‰·®Î0HãRMINORZ
+CODE_SMELL
+l
+java:S3878¼"8Remove this array creation and simply pass the elements.( ¶Ä¼8£‰‘·Î0HáRMINORZ
 CODE_SMELL

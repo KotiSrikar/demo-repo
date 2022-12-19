@@ -1,0 +1,32 @@
+package com.te.lms.service.implementation;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.te.lms.repository.AppUserRepository;
+import com.te.lms.repository.MentorRepository;
+import com.te.lms.repository.RolesRepository;
+
+class AdminServiceImplTest {
+
+	@MockBean
+	private RolesRepository rolesRepository;
+	
+	@MockBean
+	private AppUserRepository appUserRepository;
+	
+	@MockBean
+	private MentorRepository mentorRepository;
+	
+	@InjectMocks
+	private AdminServiceImpl adminServiceImpl;
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

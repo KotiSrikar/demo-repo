@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			addressDetails.add(addressDetailsEntity);
 		}
 		employee.setAddressDetails(addressDetails);
-
+ 
 		for (AddressDetails addressDetails2 : addressDetails) {
 			addressDetails2.setEmployee(employee);
 		}
@@ -222,9 +222,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 				employee1.setContact(contact);
 			}
 
-			employeeRepository.save(employee1);
+			Employee employee2 = employeeRepository.save(employee.get());
+			if (employee2 != null) {
+				return Optional.ofNullable(true);
+			}
+
 		}
-		return null;
+		return Optional.ofNullable(false);
 	}
 
 }

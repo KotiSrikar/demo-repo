@@ -17,13 +17,21 @@ import com.te.lms.dto.BatchDto;
 import com.te.lms.dto.MentorDto;
 import com.te.lms.dto.MessageDto;
 import com.te.lms.dto.RejectDto;
+import com.te.lms.dto.RequestListDto;
+import com.te.lms.dto.UpdateBatchDto;
 import com.te.lms.dto.UpdateMentorDto;
 import com.te.lms.email.Email;
+import com.te.lms.exception.BatchDetailsNotUpdatedException;
 import com.te.lms.exception.BatchesNotFoundException;
 import com.te.lms.exception.EmployeeCannotBeApprovedException;
 import com.te.lms.exception.EmployeeNotFoundException;
+import com.te.lms.exception.NoDataFoundInTheListException;
 import com.te.lms.exception.NoMentorsFoundException;
+import com.te.lms.exception.RegistrationFailedException;
+import com.te.lms.exception.UnableToDeleteBatchException;
+import com.te.lms.exception.UnableToDeleteMentorException;
 import com.te.lms.exception.UnableToFindTheEmployee;
+import com.te.lms.exception.UnableToUpdateMentorException;
 import com.te.lms.response.RegistrationResponse;
 import com.te.lms.service.AdminService;
 
@@ -35,8 +43,8 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 
 	private final AdminService adminService;
-	private final Email email;
-
+	private final Email email; 
+ 
 	@PostMapping(path = "/register/mentor")
 	public RegistrationResponse<String> adminRegister(@RequestBody MentorDto mentorDto) {
 		Optional<String> optionalmentor = adminService.register(mentorDto);
@@ -45,11 +53,11 @@ public class AdminController {
 					+ "you have been promoted from a employee to a mentor,please use these credentials for logging in \n"
 					+ optionalmentor.get();
 			String subject = "Congratulations";
-			String emailId = mentorDto.getEmailId();
+			String emailId = mentorDto.getEmailId(); 
 			email.sendEmail(message, emailId, subject);
-			return new RegistrationResponse<String>("mentor has been registered Successfully");
+			return new RegistrationResponse<String>("mentor has been registered Successfully",mentorDto.getEmployeeId());
 		}
-		throw new RuntimeException("unable to register the mentor");
+		throw new RegistrationFailedException("unable to register the mentor");
 
 	}
 
@@ -57,9 +65,9 @@ public class AdminController {
 	public RegistrationResponse<String> newBatch(@RequestBody BatchDto batchDto) {
 		Optional<String> optionalbatch = adminService.createBatch(batchDto);
 		if (optionalbatch.isPresent()) {
-			return new RegistrationResponse<String>("your batch has been Registered Successfully");
+			return new RegistrationResponse<String>("your batch has been Registered Successfully",batchDto.getBatchId());
 		}
-		throw new RuntimeException("unable to Register your batch");
+		throw new RegistrationFailedException("unable to Register your batch");
 	}
 
 	@PutMapping(path = "/update/{empId}")
@@ -67,10 +75,33 @@ public class AdminController {
 			@PathVariable(name = "empId") String empId) {
 
 		Optional<Boolean> optionalMentorId = adminService.updateMentor(updateMentorDto, empId);
-
-		return new RegistrationResponse<String>("mentor is updated successfully");
+		if(optionalMentorId.get()) {
+		return new RegistrationResponse<String>("mentor details are updated successfully",empId);
+		}
+		throw new UnableToUpdateMentorException("Unable to update the details of "+empId);
 	}
 
+	@PutMapping(path = "/batch/update/{batchId}")
+	public RegistrationResponse<String> updateBatch(@PathVariable(name = "batchId") String batchId, // test cases written
+			@RequestBody UpdateBatchDto updateBatchDto) {
+		Boolean isUpdated = adminService.updateBatch(batchId, updateBatchDto);
+		if (isUpdated) {
+			return new RegistrationResponse<String>("batch details has been  updated", batchId);
+		}
+		throw new BatchDetailsNotUpdatedException("unable to update batch details");
+
+	}
+	
+	@GetMapping(path = "/requestlist")
+	public ResponseEntity<List<RequestListDto>> getRequestList() { // test cases written
+		Optional<List<RequestListDto>> optEmployees = adminService.getRequestList();
+		if (optEmployees.isPresent()) {
+			return ResponseEntity.ok(optEmployees.get());
+		}
+		throw new NoDataFoundInTheListException("List is Empty");
+
+	}
+	
 	@PutMapping(path = "/mentor/delete/{empId}")
 	public RegistrationResponse<String> deleteMentor(@PathVariable(name = "empId") String empId) {
 
@@ -79,7 +110,7 @@ public class AdminController {
 
 			return new RegistrationResponse<String>("mentor has been removed successfully", empId);
 		}
-		throw new RuntimeException("unable to delete the mentor");
+		throw new UnableToDeleteMentorException("unable to delete the mentor" + empId);
 	}
 
 	@PutMapping(path = "/batch/delete/{batchId}")
@@ -90,7 +121,7 @@ public class AdminController {
 
 			return new RegistrationResponse<String>("batch has been removed successfully", batchId);
 		}
-		throw new RuntimeException("unable to delete the batch");
+		throw new UnableToDeleteBatchException("unable to delete the batch"+batchId);
 	}
 
 	@GetMapping(path = "/get/employee/{employeeId}")
@@ -129,10 +160,11 @@ public class AdminController {
 			String subject = "Greeetings from Technoelevate";
 			String emailId = optMessage.get().getEmaild();
 			email.sendEmail(message, emailId, subject);
-			return new RegistrationResponse<String>("employee has been approved", null);
+			return new RegistrationResponse<String>("employee has been approved",empId);
 		}
 		throw new EmployeeCannotBeApprovedException("employee cannot be approved");
 	}
+	
 
 	@PutMapping(path = "/reject/{empId}")
 	public RegistrationResponse<String> rejectRequest(@PathVariable(name = "empId") String empId,
@@ -143,7 +175,7 @@ public class AdminController {
 			String subject = "Greeetings from Technoelevate";
 			String emailId = optMessage.get().getEmaild();
 			email.sendEmail(message, emailId, subject);
-			return new RegistrationResponse<String>("employee has been  rejected succesfully", null);
+			return new RegistrationResponse<String>("employee has been Rejected Succesfully", empId);
 		}
 		throw new EmployeeNotFoundException("unable to find the employee");
 	}

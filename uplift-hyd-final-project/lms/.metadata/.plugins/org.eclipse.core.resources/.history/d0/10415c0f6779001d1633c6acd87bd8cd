@@ -1,9 +1,0 @@
-package com.te.lms.exception;
-
-public class NoMentorsFoundException extends RuntimeException {
-
-	public NoMentorsFoundException(String message) {
-		super(message);
-	}
-	
-}

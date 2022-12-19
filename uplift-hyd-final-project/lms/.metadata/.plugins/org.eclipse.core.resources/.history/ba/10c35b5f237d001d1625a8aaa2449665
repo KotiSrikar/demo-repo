@@ -1,0 +1,129 @@
+package com.te.lms;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.te.lms.dto.AddressDetailsDto;
+import com.te.lms.dto.BankDetailsDto;
+import com.te.lms.dto.ContactDto;
+import com.te.lms.dto.EducationDetailsDto;
+import com.te.lms.dto.ExperienceDto;
+import com.te.lms.dto.RegistrationDto;
+import com.te.lms.dto.SecondaryInfoDto;
+import com.te.lms.dto.TechnicalSkillsDto;
+import com.te.lms.entity.AddressDetails;
+import com.te.lms.entity.BankDetails;
+import com.te.lms.entity.Batch;
+import com.te.lms.entity.Contact;
+import com.te.lms.entity.EducationDetails;
+import com.te.lms.entity.Employee;
+import com.te.lms.entity.Experience;
+import com.te.lms.entity.SecondaryInfo;
+import com.te.lms.entity.TechnicalSkills;
+import com.te.lms.enums.AccountType;
+import com.te.lms.enums.AddressType;
+import com.te.lms.enums.BatchStatus;
+import com.te.lms.enums.ContactType;
+import com.te.lms.enums.EducationType;
+import com.te.lms.enums.MaritalStatus;
+import com.te.lms.enums.SkillRating;
+import com.te.lms.enums.Status;
+import com.te.lms.enums.YearOfExperience;
+import com.te.lms.repository.EmployeeRepository;
+import com.te.lms.service.implementation.EmployeeServiceImpl;
+
+@ExtendWith(MockitoExtension.class)
+public class EmployeeServiceTests {
+
+	@Mock
+	private EmployeeRepository employeeRepository;
+
+	@InjectMocks
+	private EmployeeServiceImpl employeeServiceImpl;
+
+	private Employee employee;
+
+	@BeforeEach
+	public void setUp() {
+		employee = Employee.builder().employeeId("TE001").employeeEmail("s@s.com")
+				.employeeDOB(LocalDate.of(2000, 05, 29)).employeeDOJ(LocalDate.of(2022, 9, 12)).employeeName("Srikar")
+				.employeeNationality("Indian").employeeStatus(Status.ACTIVE)
+				.batch(Batch.builder().batchId("Srikar01").batchName("CODEMASTERS").batchStatus(BatchStatus.INPROGRESS)
+						.build())
+				.bankDetails(BankDetails.builder().accountNum("1234567890").accountType(AccountType.SAVINGS)
+						.bankName("CANARA").branch("Afzulgunj").build())
+				.bloodGroup("B+").designation("Employee")
+				.addressDetails(List.of(AddressDetails.builder().addressId(1).addressType(AddressType.PERMANENT)
+						.doorNo("14-3-84").city("Hyderabad").landMark("near Arya samaj").locality("Goshamahal")
+						.state("Telangana").street("Nampally").pinCode(500012).build(),
+						AddressDetails.builder().addressId(1).addressType(AddressType.PERMANENT).doorNo("14-3-84")
+								.city("Hyderabad").landMark("near Arya samaj").locality("Goshamahal").state("Telangana")
+								.street("Nampally").pinCode(500012).build()))
+				.contact(List.of(Contact.builder().contactNum(8341460425L).contactType(ContactType.MOBILE).build()))
+				.educationDetails(List.of(EducationDetails.builder().educationType(EducationType.UG)
+						.instituteName("st.peters engineering college").percentage(86.9).specialization("Mechanical")
+						.state("Telangana").universityName("JNTUH").yearOfPassing(LocalDate.of(2021, 07, 27)).build()))
+				.experience(List.of(Experience.builder().companyName("TestYantra")
+						.dateOfJoining(LocalDate.of(2020, 05, 1)).dateOfRelieving(LocalDate.of(2021, 05, 1))
+						.designation("Associate Software Engineering").experienceId(159753).location("Bengalore")
+						.yearsOfExperience(YearOfExperience.ONE).build()))
+				.technicalSkills(List.of(TechnicalSkills.builder().skillRating(SkillRating.EXPERT).skillType("JAVA")
+						.yearOfExperience(YearOfExperience.TWO).build()))
+				.secondaryInfo(SecondaryInfo.builder().aadhaarNum("1234567890").fatherName("Venkatesh")
+						.maritalStatus(MaritalStatus.UNMARRIED).motherName("Renuka").panNum("A3D4H1N2K6G8").build())
+				.build();
+
+	}
+
+	@DisplayName("junit test for saveEmployee method")
+	@Test
+	public void givenEmployeeObject_whenSaveEmployee_thenReturnEmployeeObject() {
+
+		RegistrationDto registrationDto = RegistrationDto.builder().employeeId("TE001").employeeEmail("s@s.com")
+				.employeeDOB(LocalDate.of(2000, 05, 29)).employeeDOJ(LocalDate.of(2022, 9, 12)).employeeName("Srikar")
+				.employeeNationality("Indian")
+				.bankDetails(BankDetailsDto.builder().accountNum("1234567890").accountType(AccountType.SAVINGS)
+						.bankName("CANARA").branch("Afzulgunj").build())
+				.bloodGroup("B+").designation("Employee")
+				.addressDetails(List.of(
+						AddressDetailsDto.builder().addressId(1).addressType(AddressType.PERMANENT).doorNo("14-3-84")
+								.city("Hyderabad").landMark("near Arya samaj").locality("Goshamahal").state("Telangana")
+								.street("Nampally").pinCode(500012).build(),
+						AddressDetailsDto.builder().addressId(1).addressType(AddressType.PERMANENT).doorNo("14-3-84")
+								.city("Hyderabad").landMark("near Arya samaj").locality("Goshamahal").state("Telangana")
+								.street("Nampally").pinCode(500012).build()))
+				.contact(List.of(ContactDto.builder().contactNum(8341460425L).contactType(ContactType.MOBILE).build()))
+				.educationDetails(List.of(EducationDetailsDto.builder().educationType(EducationType.UG)
+						.instituteName("st.peters engineering college").percentage(86.9).specialization("Mechanical")
+						.state("Telangana").universityName("JNTUH").yearOfPassing(LocalDate.of(2021, 07, 27)).build()))
+				.experience(List.of(ExperienceDto.builder().companyName("TestYantra")
+						.dateOfJoining(LocalDate.of(2020, 05, 1)).dateOfRelieving(LocalDate.of(2021, 05, 1))
+						.designation("Associate Software Engineering").experienceId(159753).location("Bengalore")
+						.yearsOfExperience(YearOfExperience.ONE).build()))
+				.technicalSkills(List.of(TechnicalSkillsDto.builder().skillRating(SkillRating.EXPERT).skillType("JAVA")
+						.yearOfExperience(YearOfExperience.TWO).build()))
+				.secondaryInfo(SecondaryInfoDto.builder().aadhaarNum("1234567890").fatherName("Venkatesh")
+						.maritalStatus(MaritalStatus.UNMARRIED).motherName("Renuka").panNum("A3D4H1N2K6G8").build())
+				.build();
+
+		Mockito.when(employeeRepository.save(Mockito.any())).thenReturn(employee);
+
+		Employee employee1 = employeeRepository.save(employee);
+
+		assertEquals(employee, employee1);
+
+	}
+
+}

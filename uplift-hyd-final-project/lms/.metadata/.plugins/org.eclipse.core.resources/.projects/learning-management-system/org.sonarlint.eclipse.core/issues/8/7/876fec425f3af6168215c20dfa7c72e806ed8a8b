@@ -1,6 +1,3 @@
 
-h
-java:S1128"5Remove this unused import 'com.te.lms.entity.Mentor'.(’á³8ì‚½´Ï0H­RMINORZ
-CODE_SMELL
-…	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»”¬şÿÿÿÿ8ÀĞøŒĞ0HİRMINORZ
+…	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»”¬şÿÿÿÿ8ÀĞøŒĞ0H³%RMINORZ
 CODE_SMELL

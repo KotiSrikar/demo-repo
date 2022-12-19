@@ -1,0 +1,14 @@
+package com.te.lms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TestAdminController {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}
